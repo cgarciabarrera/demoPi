@@ -61,6 +61,17 @@ class PostsController < ApplicationController
     end
   end
 
+  def redisdemo
+    require 'redis'
+
+    @redis=Redis.new(:host => 'localhost', :port => 6379)
+
+    50000.times.each do |i|
+      @redis.set(i, (0...8).map { (65 + rand(26)).chr }.join )
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
